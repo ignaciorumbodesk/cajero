@@ -20,24 +20,19 @@
     messages("Bienvenido a su terminal Home-Banking.");
     messages("Ingrese sus credenciales para continuar:");
 
-    Scanner keyboardImput;
-    keyboardImput = new Scanner(System.in);
+    Scanner keyboardInput;
+    keyboardInput = new Scanner(System.in);
 
     messages("Ingrese su nombre de usuario:");
-    userInputName = keyboardImput.nextLine();
+    userInputName = keyboardInput.nextLine();
     messages("Ingrese su contraseña:");
-    userInputPassword = keyboardImput.nextLine();
+    userInputPassword = keyboardInput.nextLine();
 
     userAuthentication(userInputName, userInputPassword);
 
     messages("----- MENU PRINCIPAL -----");
     messages("ingrese el numero de la opcion deseada para operar");
     operationMenu();
-
-
-
-
-
     sessionFinish();
     }
 

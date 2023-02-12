@@ -2,7 +2,7 @@
    * DESARROLLAR UN HOME BANKING CON LAS SIGUIENTES OPERACIONES
    * Logueo con nombre de usuario y contraseña
    * saldo de cuenta
-   * opcion de ingreso y extraccion de dinero
+   * opcion de ingreso y extraccion(preguntar si se desea seguir retirando) de dinero
    * opcion de transferencia por CBU, ALIAS
    * cierre de sesion
    **/
@@ -32,8 +32,9 @@
 
     messages("----- MENU PRINCIPAL -----");
     messages("ingrese el numero de la opcion deseada para operar");
+
     operationMenu();
-    sessionFinish();
+
     }
 
 
@@ -57,7 +58,7 @@
         } else {
             System.out.println("Verifique los datos ingresados");
         }
-
+    
     }
 
     public static void operationMenu(){
@@ -68,51 +69,54 @@
 
         Scanner keyboardInputFunc;
         keyboardInputFunc = new Scanner(System.in);
+        do {
+            System.out.println("(1)-Saldos.");
+            System.out.println("(2)-Exctracciones");
+            System.out.println("(3)-Deposito en cuenta propia..");
+            System.out.println("(4)-Transferencias.");
+            System.out.println("(0)-Finalizar.");
 
-        System.out.println("(1)-Saldos.");
-        System.out.println("(2)-Exctracciones");
-        System.out.println("(3)-Deposito en cuenta propia..");
-        System.out.println("(4)-Transferencias.");
-        System.out.println("(0)-Finalizar.");
+            messages("Ingrese una opcion para continuar.");
+            userOptionMenu = keyboardInputFunc.nextShort();
+            switch (userOptionMenu) {
+                case 1:
+                    messages("+++++ Saldos +++++");
+                    System.out.println("su saldo actual es de: $" + balance + " .Pesos");
 
-        messages("Ingrese una opcion para continuar.");
-        userOptionMenu = keyboardInputFunc.nextShort();
-        switch (userOptionMenu) {
-            case 1:
-                messages("+++++ Saldos +++++");
-                System.out.println("su saldo actual es de: $" + balance +" .Pesos");
+                    System.out.println("Para volver al menu principal presione s");
+                    goBack = keyboardInputFunc.next();
 
-                System.out.println("Para volver al menu principal presione s");
-                goBack = keyboardInputFunc.next();
-                while (goBack != "s"){
-                    operationMenu();
-                }
-            break;
+                    break;
 
-            case 2:
-                messages("+++++ Extracciones +++++");
+                case 2:
+                    messages("+++++ Extracciones +++++");
 
-                System.out.println("Ingrese la cantidad que desea retirar");
 
-                cashOut = keyboardInputFunc.nextFloat();
+                    System.out.println("Ingrese la cantidad que desea retirar");
 
-                rest = cashOut % multipleNumber;
-                if (rest == 0 ) {
-                    balance -= cashOut;
-                    System.out.println("Su saldo de cuenta actual es: $" + balance +".");
-                } else {
-                    System.out.println("El monto debe ser multiplo de 10.");
-                }
+                    cashOut = keyboardInputFunc.nextFloat();
 
-                break;
-            case 3:
-                messages("+++++ DEPOSITO EN CUENTA PROPIA +++++");
+                    rest = cashOut % multipleNumber;
+                    if (rest == 0) {
+                        balance -= cashOut;
+                        System.out.println("La extraccion se realizo correctamente.");
+                        System.out.println("Su saldo de cuenta actual es: $" + balance + ".");
 
-                break;
 
-            case 0:
-                sessionFinish();
-        }
+                    } else {
+                        System.out.println("El monto debe ser multiplo de 10.");
+                    }
+
+                    break;
+                case 3:
+                    messages("+++++ DEPOSITO EN CUENTA PROPIA +++++");
+
+                    break;
+
+                case 0:
+                    sessionFinish();
+            }
+        } while (userOptionMenu != 0);
 
     }
 }
